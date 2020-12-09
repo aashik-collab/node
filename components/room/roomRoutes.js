@@ -17,6 +17,7 @@ Router.delete('/delete-room/:room_id', verifyAdminToken, roomController.deleteRo
 // ROOM REVIEWS ROUTES
 Router.post('/room-reviews/create/:room_id', verifyUserToken, roomReviewsController.createRoomReview);
 Router.delete('/room-reviews/delete/:room_review_id', verifyUserToken, roomReviewsController.deleteRoomReview);
+Router.get('room-reviews/view-room-reviews/:room_id', roomReviewsController.viewRoomReviews);
 
 // ROOM BOOKS ROUTES
 Router.post('/room-books/create/:room_id', verifyUserToken, roomBooksController.createRoomBook);

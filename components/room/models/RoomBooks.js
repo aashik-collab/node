@@ -19,6 +19,10 @@ const RoomBooks = new Schema({
         type: Date,
         required: true,
     },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('roomBooks', RoomBooks);

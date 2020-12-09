@@ -23,6 +23,10 @@ const RoomReviews = new Schema({
         minlength: [1, 'comment should be at least 1 chars long'],
         maxlength: [1000, 'comment cannnot be longer than 1k chars'],
     },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('roomReviews', RoomReviews);

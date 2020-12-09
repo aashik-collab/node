@@ -40,7 +40,22 @@ const deleteRoomReview = async (req, res) => {
     }
 };
 
+const viewRoomReviews = async (req, res) => {
+    try {
+        const { room_id } = req.params;
+        const room = Room.findById(room_id).select('_id');
+        if (!room) {
+            return res.status(404).json({ success: false, message: 'room not found' });
+        }
+        const room_reviews = RoomReview.find({ room_id }).sort({ created_at: 'desc' });
+        return res.status(200).json({ success: false, room_reviews });
+    } catch (err) {
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createRoomReview,
     deleteRoomReview,
+    viewRoomReviews,
 };
