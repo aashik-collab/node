@@ -22,9 +22,9 @@ yarn install
 yarn start
 ```
 
-## API Routes
+# API Routes
 
-### Room
+## Room
 
 ##### POST
 
@@ -64,7 +64,7 @@ yarn start
 /api/rooms/view-room-with-bookings/:room_id
 ```
 
-### RoomTypes
+## RoomTypes
 
 ##### POST
 
@@ -90,7 +90,7 @@ yarn start
 /api/rooms/room-types/view-room-types
 ```
 
-### RoomCategories
+## RoomCategories
 
 ##### POST
 
@@ -116,7 +116,7 @@ yarn start
 /api/categories/room-categories/view-room-categories
 ```
 
-### RoomReviews
+## RoomReviews
 
 ##### POST
 
@@ -142,7 +142,7 @@ yarn start
 /api/rooms/room-reviews/view/:room_id
 ```
 
-### RoomBookings
+## RoomBookings
 
 ##### POST
 
@@ -160,7 +160,7 @@ yarn start
 /api/rooms/room-books/delete/:room_book_id
 ```
 
-### Hall
+## Hall
 
 ##### POST
 
@@ -170,7 +170,7 @@ yarn start
 
 ##### GET
 
-### HallCategories
+## HallCategories
 
 ##### POST
 
@@ -180,7 +180,7 @@ yarn start
 
 ##### GET
 
-### HallReviews
+## HallReviews
 
 ##### POST
 
@@ -190,7 +190,7 @@ yarn start
 
 ##### GET
 
-### HallBookings
+## HallBookings
 
 ##### POST
 
@@ -200,7 +200,7 @@ yarn start
 
 ##### GET
 
-### User
+## User
 
 ##### POST
 
@@ -210,7 +210,7 @@ yarn start
 
 ##### GET
 
-### Profile
+## Profile
 
 ##### POST
 
