@@ -1,30 +1,35 @@
 const verifyAdminToken = require('../../middlewares/verifyAdminToken');
 const verifyUserToken = require('../../middlewares/verifyUserToken');
+
+const roomBooksController = require('./controllers/roomBooksController');
+const roomCategoriesController = require('./controllers/roomCategoriesController');
 const roomController = require('./controllers/roomController');
+const roomReviewsController = require('./controllers/roomReviewsController');
+const roomTypesController = require('./controllers/roomTypesController');
 
 const Router = require('express').Router();
 
 // ROOM ROUTES
 Router.post('/create-room', verifyAdminToken, roomController.createRoom);
-Router.put('/update-room/:room_id', verifyAdminToken, async (req, res) => {});
-Router.delete('/delete-room/:room_id', verifyAdminToken, async (req, res) => {});
+Router.put('/update-room/:room_id', verifyAdminToken, roomController.updateRoom);
+Router.delete('/delete-room/:room_id', verifyAdminToken, roomController.deleteRoom);
 
 // ROOM REVIEWS ROUTES
-Router.post('/room-reviews/create/:room_id', async (req, res) => {});
-Router.delete('/room-reviews/delete/:room_id', async (req, res) => {});
+Router.post('/room-reviews/create/:room_id', verifyUserToken, roomReviewsController.createRoomReview);
+Router.delete('/room-reviews/delete/:room_review_id', verifyUserToken, roomReviewsController.deleteRoomReview);
 
 // ROOM BOOKS ROUTES
-Router.post('/room-books/create/:room_id', async (req, res) => {});
-Router.delete('/room-books/delete/:room_id', async (req, res) => {});
+Router.post('/room-books/create/:room_id', verifyUserToken, roomBooksController.createRoomBook);
+Router.delete('/room-books/delete/:room_book_id', verifyUserToken, roomBooksController.deleteRoomBook);
 
 // ROOM CATEGORIES ROUTES
-Router.post('/room-categories/create', async (req, res) => {});
-Router.put('/room-categories/update/:room_category_id', async (req, res) => {});
-Router.delete('/room-categories/delete/:room_category_id', async (req, res) => {});
+Router.post('/room-categories/create', verifyAdminToken, roomCategoriesController.createRoomCategory);
+Router.put('/room-categories/update/:room_category_id', verifyAdminToken, roomCategoriesController.updateRoomCategory);
+Router.get('/room-categories/view-room-categories', roomCategoriesController.viewRoomCategories);
 
 // ROOM TYPES ROUTES
-Router.post('/room-types/create', async (req, res) => {});
-Router.put('/room-types/udpate/:room_type_id', async (req, res) => {});
-Router.delete('/room-types/delete/:room-type_id', async (req, res) => {});
+Router.post('/room-types/create', verifyAdminToken, roomTypesController.createRoomType);
+Router.put('/room-types/update/:room_type_id', verifyAdminToken, roomTypesController.updateRoomType);
+Router.get('/room-types/view-room-types', roomTypesController.viewRoomTypes);
 
 module.exports = Router;
