@@ -47,9 +47,10 @@ const viewRoomReviews = async (req, res) => {
         if (!room) {
             return res.status(404).json({ success: false, message: 'room not found' });
         }
-        const room_reviews = RoomReview.find({ room_id }).sort({ created_at: 'desc' });
+        const room_reviews = await RoomReview.find({ room_id }).sort({ created_at: 'desc' });
         return res.status(200).json({ success: false, room_reviews });
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ success: false, error: true, message: err.message });
     }
 };
