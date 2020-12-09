@@ -52,13 +52,13 @@ yarn start
 
 ##### GET
 
--   view room with reviews
+-   view room with all reviews in time descending order
 
 ```
 /api/rooms/view-room-with-reviews/:room_id
 ```
 
--   view room with bookings
+-   view room with bookings in time descending order
 
 ```
 /api/rooms/view-room-with-bookings/:room_id
