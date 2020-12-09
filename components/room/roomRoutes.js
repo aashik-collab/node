@@ -1,10 +1,13 @@
+const verifyAdminToken = require('../../middlewares/verifyAdminToken');
+const verifyUserToken = require('../../middlewares/verifyUserToken');
+const roomController = require('./controllers/roomController');
+
 const Router = require('express').Router();
 
 // ROOM ROUTES
-Router.post('/create-room', async (req, res) => {});
-Router.put('/update-room/:room_id', async (req, res) => {});
-Router.delete('/delete-room/:room_id', async (req, res) => {});
-Router.get('/view-room/:room_id', async (req, res) => {});
+Router.post('/create-room', verifyAdminToken, roomController.createRoom);
+Router.put('/update-room/:room_id', verifyAdminToken, async (req, res) => {});
+Router.delete('/delete-room/:room_id', verifyAdminToken, async (req, res) => {});
 
 // ROOM REVIEWS ROUTES
 Router.post('/room-reviews/create/:room_id', async (req, res) => {});

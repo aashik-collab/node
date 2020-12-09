@@ -1,7 +1,7 @@
 const User = require('../components/user/models/User');
 const jwt = require('jsonwebtoken');
 
-const verifyUserToken = async (req, res, next) => {
+const verifyAdminToken = async (req, res, next) => {
     try {
         const token = req.headers['authorization'];
         if (!token) {
@@ -20,4 +20,4 @@ const verifyUserToken = async (req, res, next) => {
     }
 };
 
-module.exports = verifyUserToken;
+module.exports = verifyAdminToken;
