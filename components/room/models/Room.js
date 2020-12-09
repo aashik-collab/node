@@ -2,10 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Room = new Schema({
-    room_book_details_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'roomBookDetails',
-    },
     room_type_id: {
         type: Schema.Types.ObjectId,
         ref: 'roomTypes',
@@ -38,6 +34,11 @@ const Room = new Schema({
         type: String,
         maxlength: [1000, 'description cannot be longer than 1k chars'],
         required: false,
+    },
+    room_image: {
+        type: String,
+        required: true,
+        maxlength: [1000, 'room_image can be max 10k chars'],
     },
 });
 

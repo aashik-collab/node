@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const RoomReviews = new Schema({
+    user_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+        required: true,
+    },
     room_id: {
         type: Schema.Types.ObjectId,
         ref: 'rooms',

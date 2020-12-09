@@ -1,16 +1,19 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const RoomBookDetails = new Schema({
+const RoomBooks = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'users',
         required: true,
     },
+    room_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'rooms',
+    },
     checkin_date: {
         type: Date,
         required: true,
-        default: Date.now,
     },
     checkout_date: {
         type: Date,
@@ -18,4 +21,4 @@ const RoomBookDetails = new Schema({
     },
 });
 
-module.exports = mongoose.model('roomBookDetails', RoomBookDetails);
+module.exports = mongoose.model('roomBooks', RoomBooks);
