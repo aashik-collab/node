@@ -13,7 +13,8 @@ const Router = require('express').Router();
 Router.post('/create-room', verifyAdminToken, roomController.createRoom);
 Router.put('/update-room/:room_id', verifyAdminToken, roomController.updateRoom);
 Router.delete('/delete-room/:room_id', verifyAdminToken, roomController.deleteRoom);
-
+Router.get('/view-room-with-reviews/:room_id', roomController.viewRoomWithReviews);
+Router.get('/view-room-with-bookings/:room_id', roomController.viewRoomBookings);
 // ROOM REVIEWS ROUTES
 Router.post('/room-reviews/create/:room_id', verifyUserToken, roomReviewsController.createRoomReview);
 Router.delete('/room-reviews/delete/:room_review_id', verifyUserToken, roomReviewsController.deleteRoomReview);

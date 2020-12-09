@@ -74,8 +74,38 @@ const deleteRoom = async (req, res) => {
         .json({ success: true, message: 'room deleted along with associated room_reviews and room_books' });
 };
 
+const viewRoomWithReviews = async (req, res) => {
+    try {
+        const { room_id } = req.params;
+        const room = await Room.findById(room_id);
+        if (!room) {
+            return res.status(404).json({ success: false, message: 'room not found' });
+        }
+        const roomReviews = await RoomReviews.find({ room_id }).sort({ created_at: 'desc' });
+        return res.status(200).json({ success: true, room, roomReviews });
+    } catch (err) {
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
+const viewRoomBookings = async (req, res) => {
+    try {
+        const { room_id } = req.params;
+        const room = await Room.findById(room_id);
+        if (!room) {
+            return res.status(404).json({ success: false, message: 'room not found' });
+        }
+        const roomBookings = await RoomBooks.find({ room_id }).sort({ created_at: 'desc' });
+        return res.status(200).json({ success: true, room, roomBookings });
+    } catch (err) {
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createRoom,
     updateRoom,
     deleteRoom,
+    viewRoomWithReviews,
+    viewRoomBookings,
 };
