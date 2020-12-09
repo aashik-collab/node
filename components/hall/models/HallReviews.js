@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const RoomReviews = new Schema({
+const HallReviews = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'users',
@@ -23,6 +23,10 @@ const RoomReviews = new Schema({
         minlength: [1, 'comment should be at least 1 chars long'],
         maxlength: [1000, 'comment cannnot be longer than 1k chars'],
     },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
-module.exports = mongoose.model('roomReviews', RoomReviews);
+module.exports = mongoose.model('hallReviews', HallReviews);
