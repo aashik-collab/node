@@ -28,20 +28,18 @@ we are using json-web-token for authenticating users in the app.
 
 #### how it works
 
-when a user login with authentication details `email and password` from front-end, backend generates a token for the user, if the details were valid. the token is then stored in localstorage of browser and sent by front end in every request that needs the verification of user
+-   user types `email` and `password` and clicks login button
+-   front-end make an api call to `/api/users/login` with POST request
+-   backend checks validity of `email` and `password` and sends back a token to front-end as a response of `/api/users/login`
+-   front-end saves the `token` in `localstorage` and sends the `token` as
+
+```
+headers:{
+    Authorization: token
+}
+```
 
 #### few important notes
-
--   there are two roles of a user: `user` and `admin`
--   there are two middlewares `verifyUserToken` and `verifyAdminToken` to check token validity sent from front-end
--   `verifyUserToken` only checks if the token is valid, so admin can also pass this middleware
--   `verifyAdminToken` strictly checks if the token received belongs to an admin user, so only admin can pass this middleware
--   It can be checked whether the user from `verifyUserToken` is `admin` or `user`, the `req.user` comes with a `role`:
-    ```
-    {
-        role:
-    }
-    ```
 
 # API Routes
 
@@ -49,7 +47,7 @@ when a user login with authentication details `email and password` from front-en
 
 ```
 /api/users/login
-/apiu/users/signup
+/api/users/signup
 ```
 
 ## Room Component
