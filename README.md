@@ -2,15 +2,6 @@
 
 -   clone the repo
 
-<<<<<<< HEAD
-```bash
-git clone https://github.com/aashik-collab/node.git
-```
-
--   install dependencies
-
-```bash
-=======
 ```
 git clone https://github.com/aashik-collab/node.git
 ```
@@ -24,7 +15,6 @@ git clone https://github.com/aashik-collab/node.git
 -   install dependencies
 
 ```
->>>>>>> staging
 yarn install
 ```
 
@@ -34,11 +24,6 @@ yarn install
 -   copy .env.example and paste in .env
 -   start the server
 
-<<<<<<< HEAD
-```bash
-yarn start
-```
-=======
 ```
 yarn start
 ```
@@ -182,4 +167,3 @@ req.user = {
 ```
 
 ```
->>>>>>> staging
