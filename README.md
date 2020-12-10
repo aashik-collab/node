@@ -45,7 +45,9 @@ headers:{
 }
 ```
 
-#### few important notes
+## few important notes
+
+#### About user roles
 
 -   user have two roles: `admin` and `user`
 -   middlewares: `verifyAdminToken` and `verifyUserToken`
