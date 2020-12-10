@@ -7,10 +7,14 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.11.4"
+    "isemail": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.4",
+    "multer": "^1.4.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
