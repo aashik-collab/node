@@ -41,13 +41,26 @@ headers:{
 
 #### few important notes
 
+-   user have two roles: `admin` and `user`
+-   middlewares: `verifyAdminToken` and `verifyUserToken`
+-   both middlewares provide role
+
+```
+req.user = {
+    ...
+    role:
+}
+```
+
 # API Routes
 
 ## User Component
 
 ```
+
 /api/users/login
 /api/users/signup
+
 ```
 
 ## Room Component
@@ -55,42 +68,52 @@ headers:{
 #### Rooms
 
 ```
+
 /api/rooms/create-room
 /api/rooms/update-room/:room_id
 /api/rooms/delete-room/:room_id
 /api/rooms/view-room-with-bookings/:room_id
 /api/rooms/view-room-with-reviews/:room_id
+
 ```
 
 #### RoomReviews
 
 ```
+
 /api/rooms/room-reviews/create/:room_id
 /api/rooms/room-reviews/delete/:room_review_id
 /api/rooms/room-reviews/view/:room_id
+
 ```
 
 #### RoomBooks
 
 ```
+
 /api/rooms/room-books/create/:room_id
 /api/rooms/room-books/delete/:room_book_id
+
 ```
 
 #### RoomCategories
 
 ```
+
 /api/rooms/room-categories/create
 /api/rooms/room-categories/update/:room_category_id
 /api/rooms/room-categories/view-room-categories
+
 ```
 
 #### RoomCategories
 
 ```
+
 /api/rooms/room-types/create
 /api/rooms/room-types/update/:room_type_id
 /api/rooms/room-types/view-room-types
+
 ```
 
 ## Hall Component
@@ -98,32 +121,43 @@ headers:{
 #### Hall
 
 ```
+
 /api/halls/create-hall
 /api/halls/update-hall/:hall_id
 /api/halls/delete-hall/:hall_id
 /api/halls/view-hall-with-reviews/:hall_id
 /api/halls/view-hall-with-bookings/:hall_id
+
 ```
 
 #### HallReviews
 
 ```
+
 /api/halls/hall-reviews/create/:hall_id
 /api/halls/hall-reviews/delete/:hall_review_id
+
 ```
 
 #### HallBooks
 
 ```
+
 /api/halls/hall-books/create/:hall_id
 /api/halls/hall-books/delete/:hall_book_id
+
 ```
 
 #### HallCategories
 
 ```
+
 /api/halls/hall-categories/create
 /api/halls/hall-categories/update/:hall_category_id
 /api/halls/hall-categories/view-hall-categories
+
+```
+
+```
 
 ```
