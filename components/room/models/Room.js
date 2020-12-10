@@ -16,7 +16,6 @@ const Room = new Schema({
     },
     discount: {
         type: Number,
-        required: false,
     },
     availability: {
         type: Boolean,

@@ -22,6 +22,21 @@ yarn install
 yarn start
 ```
 
+## About authentication
+
+we are using json-web-token for authenticating users in the app.
+
+#### how it works
+
+when a user login with authentication details `email and password` from front-end, backend generates a token for the user, if the details were valid. the token is then stored in localstorage of browser and sent by front end in every request that needs the verification of user
+
+#### few important notes
+
+-   there are two roles of a user: `user` and `admin`
+-   there are two middlewares `verifyUserToken` and `verifyAdminToken` to check token validity sent from front-end
+-   `verifyUserToken` only checks if the token is valid, so admin can also pass this middleware
+-   `verifyAdminToken` strictly checks if the token received belongs to an admin user, so only admin can pass this middleware
+
 # API Routes
 
 ## Room

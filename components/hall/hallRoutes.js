@@ -1,5 +1,7 @@
 const verifyAdminToken = require('../../middlewares/verifyAdminToken');
+const verifyUserToken = require('../../middlewares/verifyUserToken');
 const hallController = require('./controllers/hallController');
+const hallReviewsController = require('./controllers/hallReviewsController');
 
 const Router = require('express').Router();
 
@@ -11,8 +13,8 @@ Router.get('/view-hall-with-reviews/:hall_id', hallController.viewHallReviews);
 Router.get('/view-hall-with-bookings/:hall_id', verifyAdminToken, hallController.viewHallBookings);
 
 // HALL REVIEWS ROUTES
-Router.post('/hall-reviews/create', async (req, res) => {});
-Router.delete('/hall-reviews/delete/:hall_review_id', async (req, res) => {});
+Router.post('/hall-reviews/create', verifyUserToken, hallReviewsController.createHallReview);
+Router.delete('/hall-reviews/delete/:hall_review_id', verifyUserToken, hallReviewsController.deleteHallReview);
 
 // HALL BOOKS ROUTES
 Router.post('/hall-books/create', async (req, res) => {});

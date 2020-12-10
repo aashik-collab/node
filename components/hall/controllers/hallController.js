@@ -23,7 +23,7 @@ const createHall = async (req, res) => {
 };
 const updateHall = async (req, res) => {
     try {
-        const { hall_category_id, price, discount, availability, title, description, room_image } = req.body;
+        const { hall_category_id, price, discount, availability, title, description, hall_image } = req.body;
 
         hall = await Hall.findById(req.params.hall_id);
         hall.room_category_id = hall_category_id ? hall_category_id : hall.hall_category_id;
@@ -67,7 +67,7 @@ const viewHallReviews = async (req, res) => {
 const viewHallBookings = async (req, res) => {
     try {
         const { hall_id } = req.params;
-        const hall = await Room.findById(hall_id);
+        const hall = await Hall.findById(hall_id);
         if (!hall) {
             return res.status(404).json({ success: false, message: 'hall not found' });
         }
