@@ -13,7 +13,7 @@ Router.get('/view-hall-with-reviews/:hall_id', hallController.viewHallReviews);
 Router.get('/view-hall-with-bookings/:hall_id', verifyAdminToken, hallController.viewHallBookings);
 
 // HALL REVIEWS ROUTES
-Router.post('/hall-reviews/create', verifyUserToken, hallReviewsController.createHallReview);
+Router.post('/hall-reviews/create/:hall_id', verifyUserToken, hallReviewsController.createHallReview);
 Router.delete('/hall-reviews/delete/:hall_review_id', verifyUserToken, hallReviewsController.deleteHallReview);
 
 // HALL BOOKS ROUTES
