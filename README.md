@@ -28,6 +28,13 @@ yarn install
 yarn start
 ```
 
+## Tools and Technologies
+
+-   json-web-token to generate and verify token
+-   bcryptjs to hash password
+-   mongoose ORM for mongodb
+-   expressjs to create REST API
+
 ## About authentication
 
 we are using json-web-token for authenticating users in the app.

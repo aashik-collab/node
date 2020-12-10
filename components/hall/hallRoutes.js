@@ -12,7 +12,7 @@ Router.post('/create-hall', verifyAdminToken, hallController.createHall);
 Router.put('/update-hall/:hall_id', verifyAdminToken, hallController.updateHall);
 Router.delete('/delete-hall/:hall_id', verifyAdminToken, hallController.deleteHall);
 Router.get('/view-hall-with-reviews/:hall_id', hallController.viewHallReviews);
-Router.get('/view-hall-with-bookings/:hall_id', verifyAdminToken, hallController.viewHallBookings);
+Router.get('/view-hall-with-bookings/:hall_id', verifyUserToken, hallController.viewHallBookings);
 
 // HALL REVIEWS ROUTES
 Router.post('/hall-reviews/create/:hall_id', verifyUserToken, hallReviewsController.createHallReview);
