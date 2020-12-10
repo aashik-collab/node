@@ -36,6 +36,12 @@ when a user login with authentication details `email and password` from front-en
 -   there are two middlewares `verifyUserToken` and `verifyAdminToken` to check token validity sent from front-end
 -   `verifyUserToken` only checks if the token is valid, so admin can also pass this middleware
 -   `verifyAdminToken` strictly checks if the token received belongs to an admin user, so only admin can pass this middleware
+-   It can be checked whether the user from `verifyUserToken` is `admin` or `user`, the `req.user` comes with a `role`:
+    ```
+    {
+        role:
+    }
+    ```
 
 # API Routes
 
