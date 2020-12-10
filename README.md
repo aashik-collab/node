@@ -2,13 +2,19 @@
 
 -   clone the repo
 
-```bash
+```
 git clone https://github.com/aashik-collab/node.git
+```
+
+-   move to working directory
+
+```
+ cd node
 ```
 
 -   install dependencies
 
-```bash
+```
 yarn install
 ```
 
@@ -18,7 +24,7 @@ yarn install
 -   copy .env.example and paste in .env
 -   start the server
 
-```bash
+```
 yarn start
 ```
 
