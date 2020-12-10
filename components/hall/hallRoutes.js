@@ -1,5 +1,7 @@
 const verifyAdminToken = require('../../middlewares/verifyAdminToken');
 const verifyUserToken = require('../../middlewares/verifyUserToken');
+const hallBooksController = require('./controllers/hallBooksController');
+const hallCategoriesController = require('./controllers/hallCategoriesController');
 const hallController = require('./controllers/hallController');
 const hallReviewsController = require('./controllers/hallReviewsController');
 
@@ -17,12 +19,12 @@ Router.post('/hall-reviews/create/:hall_id', verifyUserToken, hallReviewsControl
 Router.delete('/hall-reviews/delete/:hall_review_id', verifyUserToken, hallReviewsController.deleteHallReview);
 
 // HALL BOOKS ROUTES
-Router.post('/hall-books/create', async (req, res) => {});
-Router.delete('/hall-books/delete/:hall_book_id', async (req, res) => {});
+Router.post('/hall-books/create/:hall_id', verifyUserToken, hallBooksController.createHallBook);
+Router.delete('/hall-books/delete/:hall_book_id', verifyUserToken, hallBooksController.deleteHallBook);
 
 // HALL CATEGORIES ROUTES
-Router.post('/hall-categories/create', async (req, res) => {});
-Router.put('/hall-categories/update/:hall_category_id', async (req, res) => {});
-Router.get('/hall-categories/view-hall-categories', async (req, res) => {});
+Router.post('/hall-categories/create', hallCategoriesController.createHallCategory);
+Router.put('/hall-categories/update/:hall_category_id', hallCategoriesController.updateHallCategory);
+Router.get('/hall-categories/view-hall-categories', hallCategoriesController.viewHallCategories);
 
 module.exports = Router;

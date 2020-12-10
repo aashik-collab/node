@@ -45,198 +45,87 @@ when a user login with authentication details `email and password` from front-en
 
 # API Routes
 
-## Room
+## User Component
 
-##### POST
+```
+/api/users/login
+/apiu/users/signup
+```
 
--   create room
+## Room Component
+
+#### Rooms
 
 ```
 /api/rooms/create-room
-```
-
-##### PUT
-
--   update room
-
-```
 /api/rooms/update-room/:room_id
-```
-
-##### DELETE
-
--   delete room
-
-```
 /api/rooms/delete-room/:room_id
-```
-
-##### GET
-
--   view room with all reviews in time descending order
-
-```
+/api/rooms/view-room-with-bookings/:room_id
 /api/rooms/view-room-with-reviews/:room_id
 ```
 
--   view room with bookings in time descending order
-
-```
-/api/rooms/view-room-with-bookings/:room_id
-```
-
-## RoomTypes
-
-##### POST
-
--   create room type
-
-```
-/api/rooms/room-types/create
-```
-
-##### PUT
-
--   update room type
-
-```
-/api/rooms/room-types/update/:room_type_id
-```
-
-##### GET
-
--   view all room types in ascending alphabetical order
-
-```
-/api/rooms/room-types/view-room-types
-```
-
-## RoomCategories
-
-##### POST
-
--   create room category
-
-```
-/api/categories/room-categories/create
-```
-
-##### PUT
-
--   update room category
-
-```
-/api/categories/room-categories/update/:room_category_id
-```
-
-##### GET
-
--   view all room categories in ascending alpabetical order
-
-```
-/api/categories/room-categories/view-room-categories
-```
-
-## RoomReviews
-
-##### POST
-
--   create a room review
+#### RoomReviews
 
 ```
 /api/rooms/room-reviews/create/:room_id
-```
-
-##### DELETE
-
--   delete a room review
-
-```
 /api/rooms/room-reviews/delete/:room_review_id
-```
-
-##### GET
-
--   view all room reviews associated with a room
-
-```
 /api/rooms/room-reviews/view/:room_id
 ```
 
-## RoomBookings
-
-##### POST
-
--   create a room booking
+#### RoomBooks
 
 ```
 /api/rooms/room-books/create/:room_id
-```
-
-##### DELETE
-
--   delete a room booking
-
-```
 /api/rooms/room-books/delete/:room_book_id
 ```
 
-## Hall
+#### RoomCategories
 
-##### POST
+```
+/api/rooms/room-categories/create
+/api/rooms/room-categories/update/:room_category_id
+/api/rooms/room-categories/view-room-categories
+```
 
-##### PUT
+#### RoomCategories
 
-##### DELETE
+```
+/api/rooms/room-types/create
+/api/rooms/room-types/update/:room_type_id
+/api/rooms/room-types/view-room-types
+```
 
-##### GET
+## Hall Component
 
-## HallCategories
+#### Hall
 
-##### POST
+```
+/api/halls/create-hall
+/api/halls/update-hall/:hall_id
+/api/halls/delete-hall/:hall_id
+/api/halls/view-hall-with-reviews/:hall_id
+/api/halls/view-hall-with-bookings/:hall_id
+```
 
-##### PUT
+#### HallReviews
 
-##### DELETE
+```
+/api/halls/hall-reviews/create/:hall_id
+/api/halls/hall-reviews/delete/:hall_review_id
+```
 
-##### GET
+#### HallBooks
 
-## HallReviews
+```
+/api/halls/hall-books/create/:hall_id
+/api/halls/hall-books/delete/:hall_book_id
+```
 
-##### POST
+#### HallCategories
 
-##### PUT
+```
+/api/halls/hall-categories/create
+/api/halls/hall-categories/update/:hall_category_id
+/api/halls/hall-categories/view-hall-categories
 
-##### DELETE
-
-##### GET
-
-## HallBookings
-
-##### POST
-
-##### PUT
-
-##### DELETE
-
-##### GET
-
-## User
-
-##### POST
-
-##### PUT
-
-##### DELETE
-
-##### GET
-
-## Profile
-
-##### POST
-
-##### PUT
-
-##### DELETE
-
-##### GET
+```
