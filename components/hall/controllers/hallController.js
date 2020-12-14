@@ -78,10 +78,21 @@ const viewHallBookings = async (req, res) => {
     }
 };
 
+const fetchSomeHallsForHomepage = async (req, res) => {
+    try {
+        const halls = await Hall.find().limit(6).sort({ created_at: 'desc' });
+        return res.status(200).json({ success: true, halls });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createHall,
     updateHall,
     deleteHall,
     viewHallReviews,
     viewHallBookings,
+    fetchSomeHallsForHomepage,
 };

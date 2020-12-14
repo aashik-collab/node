@@ -27,4 +27,9 @@ Router.post('/hall-categories/create', hallCategoriesController.createHallCatego
 Router.put('/hall-categories/update/:hall_category_id', hallCategoriesController.updateHallCategory);
 Router.get('/hall-categories/view-hall-categories', hallCategoriesController.viewHallCategories);
 
+/*
+ *************************** MAKING API PHASE 2 ***************************
+ */
+Router.get('/fetch-some-halls-for-homepage', hallController.fetchSomeHallsForHomepage);
+
 module.exports = Router;

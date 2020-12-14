@@ -102,10 +102,21 @@ const viewRoomBookings = async (req, res) => {
     }
 };
 
+const fetchSomeRoomsForHomepage = async (req, res) => {
+    try {
+        const rooms = await Room.find().limit(6).sort({ created_at: 'desc' });
+        return res.status(200).json({ success: true, rooms });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createRoom,
     updateRoom,
     deleteRoom,
     viewRoomWithReviews,
     viewRoomBookings,
+    fetchSomeRoomsForHomepage,
 };
