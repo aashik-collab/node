@@ -1,5 +1,6 @@
 const multer = require('multer');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const upload = multer();
 
@@ -7,6 +8,8 @@ const userRoutes = require('./components/user/userRoutes');
 const roomRoutes = require('./components/room/roomRoutes');
 const hallRoutes = require('./components/hall/hallRoutes');
 
+// cors
+app.use(cors());
 // body parser
 app.use(express.json());
 
