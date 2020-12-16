@@ -106,9 +106,13 @@ const fetchSomeHallsForHomepage = async (req, res) => {
                     reviewsCount: 0,
                 };
             }
-            const hallRatingSum = hallReviews.reduce((accumulator, item) => {
-                return accumulator.rate_value + item.rate_value;
+
+            let hallRatingSum = 0;
+
+            hallReviews.forEach((review) => {
+                hallRatingSum += review.rate_value;
             });
+
             return {
                 ...hall._doc,
                 avg_rating: hallRatingSum / hallReviews.length,
@@ -138,9 +142,12 @@ const fetchAllHalls = async (req, res) => {
                 reviewsCount: 0,
             };
         }
-        const hallRatingSum = HallReviews.reduce((acc, item) => {
-            return acc.rate_value + item.rate_value;
+
+        let hallRatingSum = 0;
+        hallReviews.forEach((review) => {
+            hallRatingSum += review.rate_value;
         });
+
         return {
             ...hall._doc,
             avg_rating: hallRatingSum / hallReviews.length,

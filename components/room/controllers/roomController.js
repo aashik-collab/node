@@ -132,8 +132,10 @@ const fetchSomeRoomsForHomepage = async (req, res) => {
                     reviewsCount: 0,
                 };
             }
-            const roomRatingSum = roomReviews.reduce((accumulator, item) => {
-                return accumulator.rate_value + item.rate_value;
+
+            let roomRatingSum = 0;
+            roomReviews.forEach((review) => {
+                roomRatingSum += review.rate_value;
             });
 
             return {
@@ -163,9 +165,12 @@ const fetchAllRooms = async (req, res) => {
                 reviewsCount: 0,
             };
         }
-        const roomRatingSum = roomReviews.reduce((accumulator, item) => {
-            return accumulator.rate_value + item.rate_value;
+
+        let roomRatingSum = 0;
+        roomReviews.forEach((review) => {
+            roomRatingSum += review.rate_value;
         });
+
         return {
             ...room._doc,
             avg_rating: roomRatingSum / roomReviews.length,
