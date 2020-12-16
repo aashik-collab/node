@@ -58,8 +58,23 @@ const viewHallReviews = async (req, res) => {
         if (!hall) {
             return res.status(404).json({ success: false, message: 'hall not found' });
         }
-        const hallReviews = await HallReviews.find({ hall_id }).sort({ created_at: 'desc' });
-        return res.status(200).json({ success: true, hall, hallReviews });
+        const hallReviews = await HallReviews.find({ hall_id })
+            .sort({ created_at: 'desc' })
+            .populate('user_id', 'email');
+
+        let hallRatingSum = 0;
+        hallReviews.forEach((review) => {
+            hallRatingSum += review.rate_value;
+        });
+
+        return res.status(200).json({
+            success: true,
+            hall: {
+                ...hall._doc,
+                avg_rating: hallRatingSum / hallReviews.length,
+            },
+            hallReviews,
+        });
     } catch (err) {
         return res.status(500).json({ success: false, error: true, message: err.message });
     }
@@ -87,8 +102,8 @@ const fetchSomeHallsForHomepage = async (req, res) => {
             if (!hallReviews.length) {
                 return {
                     ...hall._doc,
-                    hallRating: 0,
-                    hallReviewsCount: 0,
+                    avg_rating: 0,
+                    reviewsCount: 0,
                 };
             }
             const hallRatingSum = hallReviews.reduce((accumulator, item) => {
@@ -96,8 +111,8 @@ const fetchSomeHallsForHomepage = async (req, res) => {
             });
             return {
                 ...hall._doc,
-                hallRating: hallRatingSum / hallReviews.length,
-                hallReviewsCount: hallReviews.length,
+                avg_rating: hallRatingSum / hallReviews.length,
+                reviewsCount: hallReviews.length,
             };
         });
 
@@ -119,8 +134,8 @@ const fetchAllHalls = async (req, res) => {
         if (!hallReviews.length) {
             return {
                 ...hall._doc,
-                hallRating: 0,
-                hallReviewsCount: 0,
+                avg_rating: 0,
+                reviewsCount: 0,
             };
         }
         const hallRatingSum = HallReviews.reduce((acc, item) => {
@@ -128,8 +143,8 @@ const fetchAllHalls = async (req, res) => {
         });
         return {
             ...hall._doc,
-            hallRating: hallRatingSum / hallReviews.length,
-            hallReviewsCount: hallReviews.length,
+            avg_rating: hallRatingSum / hallReviews.length,
+            reviewsCount: hallReviews.length,
         };
     });
 

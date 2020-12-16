@@ -81,8 +81,25 @@ const viewRoomWithReviews = async (req, res) => {
         if (!room) {
             return res.status(404).json({ success: false, message: 'room not found' });
         }
-        const roomReviews = await RoomReviews.find({ room_id }).sort({ created_at: 'desc' });
-        return res.status(200).json({ success: true, room, roomReviews });
+
+        const roomReviews = await RoomReviews.find({ room_id })
+            .sort({ created_at: 'desc' })
+            .populate('user_id', 'email');
+
+        let roomRatingSum = 0;
+
+        roomReviews.forEach((review) => {
+            roomRatingSum += review.rate_value;
+        });
+
+        return res.status(200).json({
+            success: true,
+            room: {
+                ...room._doc,
+                avg_rating: roomRatingSum / roomReviews.length,
+            },
+            roomReviews,
+        });
     } catch (err) {
         return res.status(500).json({ success: false, error: true, message: err.message });
     }
@@ -111,8 +128,8 @@ const fetchSomeRoomsForHomepage = async (req, res) => {
             if (!roomReviews.length) {
                 return {
                     ...room._doc,
-                    roomRating: 0,
-                    roomReviewsCount: 0,
+                    avg_rating: 0,
+                    reviewsCount: 0,
                 };
             }
             const roomRatingSum = roomReviews.reduce((accumulator, item) => {
@@ -121,8 +138,8 @@ const fetchSomeRoomsForHomepage = async (req, res) => {
 
             return {
                 ...room._doc,
-                roomRating: roomRatingSum / roomReviews.length,
-                roomReviewsCount: roomReviews.length,
+                avg_rating: roomRatingSum / roomReviews.length,
+                reviewsCount: roomReviews.length,
             };
         });
 
@@ -142,8 +159,8 @@ const fetchAllRooms = async (req, res) => {
         if (!roomReviews.length) {
             return {
                 ...room._doc,
-                roomRating: 0,
-                roomReviewsCount: 0,
+                avg_rating: 0,
+                reviewsCount: 0,
             };
         }
         const roomRatingSum = roomReviews.reduce((accumulator, item) => {
@@ -151,8 +168,8 @@ const fetchAllRooms = async (req, res) => {
         });
         return {
             ...room._doc,
-            roomRating: roomRatingSum / roomReviews.length,
-            roomReviewsCount: roomReviews.length,
+            avg_rating: roomRatingSum / roomReviews.length,
+            reviewsCount: roomReviews.length,
         };
     });
     rooms = await Promise.all(promises);
