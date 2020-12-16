@@ -110,6 +110,33 @@ const fetchSomeHallsForHomepage = async (req, res) => {
     }
 };
 
+const fetchAllHalls = async (req, res) => {
+    let halls = await Hall.find().sort({ created_at: 'desc' });
+
+    const promises = halls.map(async (hall) => {
+        const hallReviews = await HallReviews.find({ hall_id: hall._id }).select('_id rate_value');
+
+        if (!hallReviews.length) {
+            return {
+                ...hall._doc,
+                hallRating: 0,
+                hallReviewsCount: 0,
+            };
+        }
+        const hallRatingSum = HallReviews.reduce((acc, item) => {
+            return acc.rate_value + item.rate_value;
+        });
+        return {
+            ...hall._doc,
+            hallRating: hallRatingSum / hallReviews.length,
+            hallReviewsCount: hallReviews.length,
+        };
+    });
+
+    halls = await Promise.all(promises);
+    return res.status(200).json({ success: true, halls });
+};
+
 module.exports = {
     createHall,
     updateHall,
@@ -117,4 +144,5 @@ module.exports = {
     viewHallReviews,
     viewHallBookings,
     fetchSomeHallsForHomepage,
+    fetchAllHalls,
 };

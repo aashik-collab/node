@@ -31,5 +31,6 @@ Router.get('/hall-categories/view-hall-categories', hallCategoriesController.vie
  *************************** MAKING API PHASE 2 ***************************
  */
 Router.get('/fetch-some-halls-for-homepage', hallController.fetchSomeHallsForHomepage);
+Router.get('/fetch-all-halls', hallController.fetchAllHalls);
 
 module.exports = Router;

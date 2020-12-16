@@ -39,5 +39,6 @@ Router.get('/room-types/view-room-types', roomTypesController.viewRoomTypes);
  *************************** MAKING API PHASE 2 ***************************
  */
 Router.get('/fetch-some-rooms-for-homepage', roomController.fetchSomeRoomsForHomepage);
+Router.get('/fetch-all-rooms', roomController.fetchAllRooms);
 
 module.exports = Router;
