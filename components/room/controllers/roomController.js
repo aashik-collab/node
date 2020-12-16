@@ -104,7 +104,30 @@ const viewRoomBookings = async (req, res) => {
 
 const fetchSomeRoomsForHomepage = async (req, res) => {
     try {
-        const rooms = await Room.find().limit(6).sort({ created_at: 'desc' });
+        let rooms = await Room.find().limit(6).sort({ created_at: 'desc' });
+
+        const promises = rooms.map(async (room) => {
+            const roomReviews = await RoomReviews.find({ room_id: room.id }).select('_id rate_value');
+            if (!roomReviews.length) {
+                return {
+                    ...room._doc,
+                    roomRating: 0,
+                    roomReviewsCount: 0,
+                };
+            }
+            const roomRatingSum = roomReviews.reduce((accumulator, item) => {
+                return accumulator.rate_value + item.rate_value;
+            });
+
+            return {
+                ...room._doc,
+                roomRating: roomRatingSum / roomReviews.length,
+                roomReviewsCount: roomReviews.length,
+            };
+        });
+
+        rooms = await Promise.all(promises);
+
         return res.status(200).json({ success: true, rooms });
     } catch (err) {
         console.log(err);

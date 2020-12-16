@@ -80,7 +80,29 @@ const viewHallBookings = async (req, res) => {
 
 const fetchSomeHallsForHomepage = async (req, res) => {
     try {
-        const halls = await Hall.find().limit(6).sort({ created_at: 'desc' });
+        let halls = await Hall.find().limit(6).sort({ created_at: 'desc' });
+
+        const promises = halls.map(async (hall) => {
+            const hallReviews = await HallReviews.find({ hall_id: hall._id }).select('_id rate_value');
+            if (!hallReviews.length) {
+                return {
+                    ...hall._doc,
+                    hallRating: 0,
+                    hallReviewsCount: 0,
+                };
+            }
+            const hallRatingSum = hallReviews.reduce((accumulator, item) => {
+                return accumulator.rate_value + item.rate_value;
+            });
+            return {
+                ...hall._doc,
+                hallRating: hallRatingSum / hallReviews.length,
+                hallReviewsCount: hallReviews.length,
+            };
+        });
+
+        halls = await Promise.all(promises);
+
         return res.status(200).json({ success: true, halls });
     } catch (err) {
         console.log(err);
