@@ -31,6 +31,10 @@ const Hall = new Schema({
         type: String,
         maxlength: [1000, 'room_image can be max 1k chars'],
     },
+    no_of_peope: {
+        type: Number,
+        min: [1, 'min num of people is 1'],
+    },
 });
 
 module.exports = mongoose.model('halls', Hall);
