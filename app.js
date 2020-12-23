@@ -24,7 +24,7 @@ app.use('/api', upload.none(), routes);
 
 //
 // if no routes are hit send react app
-app.use((req, res) => {
+app.use('/', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
