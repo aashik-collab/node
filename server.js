@@ -12,10 +12,12 @@ const MONGODB_URI_DEV = process.env.MONGODB_URI_DEV || 'mongodb://localhost:2701
 const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD;
 const MONGODB_URI = MODE === 'PRODUCTION' ? MONGODB_URI_PROD : MONGODB_URI_DEV;
 
+// connecting to database
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log(chalk.bold.blue('mongodb connected'));
 });
 
+// startng development server
 app.listen(PORT, () => {
     console.log(chalk.bold.yellow('server is running on port ' + PORT));
 });
