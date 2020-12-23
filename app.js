@@ -15,7 +15,7 @@ app.use(cors());
 // body parser
 app.use(express.json());
 // static files
-app.use('/', express.static('client/build'));
+app.use('/', express.static(path.join(__dirname, 'client/build')));
 
 app.use('/api/users', upload.none(), userRoutes);
 app.use('/api/rooms', upload.none(), roomRoutes);
