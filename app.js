@@ -15,7 +15,7 @@ app.use(cors());
 // body parser
 app.use(express.json());
 // static files
-app.use(express.static('./client/build'));
+app.use(express.static('client/build'));
 
 app.use('/api/users', upload.none(), userRoutes);
 app.use('/api/rooms', upload.none(), roomRoutes);
@@ -24,7 +24,7 @@ app.use('/api', upload.none(), routes);
 
 //
 // if no routes are hit send react app
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
