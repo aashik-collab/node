@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild":"yarn install --prefix client && yarn build --prefix client"
+    "heroku-postbuild":"cd client && yarn install && yarn build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
