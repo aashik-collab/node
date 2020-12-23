@@ -12,7 +12,7 @@
     "start": "node server.js",
     "client-install":"cd client && yarn install",
     "client-build":"cd client && yarn build",
-    "heroku-postbuild":"cd client && yarn install && yarn build "
+    "heroku-postbuild":"yarn client-install && yarn client-build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
