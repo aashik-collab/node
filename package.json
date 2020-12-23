@@ -7,7 +7,7 @@
     "start": "node server.js",
     "client-install":"cd client && yarn install",
     "client-build":"cd client && yarn build",
-    "build":"yarn client-build",
+    "build":"yarn client-install && yarn client-build",
     "heroku-postbuild":"yarn client-install && yarn client-build"
   },
   "dependencies": {
