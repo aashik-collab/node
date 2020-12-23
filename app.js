@@ -21,9 +21,9 @@ app.use('/api/halls', upload.none(), hallRoutes);
 app.use('/api', upload.none(), routes);
 
 // static files
-app.use(express.static('client/build'));
+app.use('/', express.static('client/build'));
 // if no routes are hit send react app
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
