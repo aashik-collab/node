@@ -14,7 +14,7 @@
     "client-build":"cd client && yarn build",
     "admin-install":"cd admin && yarn install",
     "admin-build":"cd admin && yarn build",
-    "heroku-postbuild":"yarn client-install && yarn client-build && yarn admin-install && admin-build"
+    "heroku-postbuild":"yarn client-install && yarn client-build && yarn admin-install && yarn admin-build"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
