@@ -16,11 +16,16 @@ app.use(cors());
 app.use(express.json());
 // static files
 app.use('/', express.static(path.join(__dirname, 'client/build')));
+app.use('/admin', express.static(path.join(__dirname, 'admin/build')));
 
 app.use('/api/users', upload.none(), userRoutes);
 app.use('/api/rooms', upload.none(), roomRoutes);
 app.use('/api/halls', upload.none(), hallRoutes);
 app.use('/api', upload.none(), routes);
+
+app.get('/admin/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'admin', 'build', 'index.html'));
+});
 
 // if no routes are hit send react app
 app.get('/*', (req, res) => {
