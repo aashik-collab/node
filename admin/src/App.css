@@ -1,0 +1,36 @@
+.sidebar {
+    height: 100vh;
+    background-color: rgb(40, 63, 133);
+    overflow-y: scroll;
+}
+
+.sidebar-component-title {
+    background-color: rgb(18, 41, 112);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-button:hover {
+    cursor: pointer;
+    background-color: rgb(21, 47, 124);
+}
+.sidebar-button.active {
+    background-color: rgb(14, 38, 109);
+}
+.form-container {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+}
+@media only screen and (max-width: 1000px) {
+    .form-container {
+        width: 50%;
+    }
+}
