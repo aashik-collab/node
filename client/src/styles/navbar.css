@@ -1,0 +1,38 @@
+.navbar_container {
+    position: fixed;
+    width: 100%;
+    background-color: royalblue;
+    height: fit-content;
+    z-index: 900;
+}
+.navbar_navlink {
+    color: #ddd;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 0;
+    font-weight: 500;
+}
+.navbar_navlink:hover {
+    color: #eee;
+    background-color: rgb(51, 89, 201);
+}
+.navbar_navlink.active {
+    color: #eee;
+    background-color: rgb(41, 77, 185);
+}
+.navbar_menu_icon {
+    margin-right: 20px !important;
+    color: #ddd;
+    padding: 6px;
+}
+.navbar_menu_icon.active {
+    background-color: rgb(41, 77, 185);
+}
+.navbar_menu_icon:active {
+    background-color: rgb(41, 77, 185);
+}
+.navbar_logo {
+    cursor: pointer;
+    color: #ddd;
+    font-weight: 400;
+}

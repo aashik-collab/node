@@ -1,0 +1,20 @@
+.card-title {
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 10px 0;
+    color: royalblue;
+}
+.card-title a {
+    text-decoration: none;
+}
+.card-title:hover {
+    color: rgb(36, 73, 184);
+}
+.card-rating i {
+    color: rgb(255, 166, 0);
+}
+.cardFixedSize-img {
+    width: 300px;
+}
