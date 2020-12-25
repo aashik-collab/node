@@ -117,7 +117,7 @@ function Sidebar(props) {
                                 <span>log out</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </div>
-                            <NavLink to="/admin" className="p-2 sidebar-button w-100">
+                            <NavLink exact to="/admin" className="p-2 sidebar-button w-100">
                                 <span>go to dashboard</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
