@@ -5,10 +5,12 @@ const Room = new Schema({
     room_type_id: {
         type: Schema.Types.ObjectId,
         ref: 'roomTypes',
+        required: true,
     },
     room_category_id: {
         type: Schema.Types.ObjectId,
         ref: 'roomCategories',
+        required: true,
     },
     price: {
         type: Number,
