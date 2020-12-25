@@ -1,0 +1,72 @@
+.workspace {
+    overflow-y: scroll;
+    height: 100vh;
+}
+.sidebar {
+    height: 100vh;
+    background-color: rgb(40, 63, 133);
+    overflow-y: scroll;
+    transition: all 0.2s ease-in-out;
+}
+.sidebar-close-icon {
+    display: none;
+}
+@media only screen and (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        width: 80%;
+    }
+    .sidebar.mobile-show {
+        margin-left: 0;
+    }
+    .sidebar.mobile-hide {
+        margin-left: -80%;
+    }
+    .sidebar-close-icon {
+        display: block !important;
+        cursor: pointer;
+    }
+}
+
+.sidebar-component-title {
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+}
+.sidebar-component-title:hover {
+    background-color: rgb(17, 45, 128);
+}
+.sidebar-buttons-container {
+}
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: #ddd;
+    user-select: none;
+}
+.sidebar-button:hover {
+    color: #ddd;
+}
+
+.sidebar-button:hover {
+    cursor: pointer;
+    background-color: rgb(21, 47, 124);
+}
+.sidebar-button.active {
+    background-color: rgb(14, 38, 109);
+}
+.form-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+}
+@media only screen and (max-width: 1000px) {
+    .form-container {
+        width: 90%;
+    }
+}
