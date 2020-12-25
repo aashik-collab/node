@@ -33,19 +33,19 @@ function Sidebar(props) {
                     </div>
                     {!!roomsClicked && (
                         <div className="sidebar-buttons-container">
-                            <NavLink to="/rooms/create-room" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/rooms/create-room" className="p-2 sidebar-button w-100">
                                 <span>create room</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <NavLink to="/rooms/view-rooms" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/rooms/view-rooms" className="p-2 sidebar-button w-100">
                                 <span>view rooms</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <NavLink to="/rooms/room-types" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/rooms/room-types" className="p-2 sidebar-button w-100">
                                 <span>room types</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <NavLink to="/rooms/room-categories" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/rooms/room-categories" className="p-2 sidebar-button w-100">
                                 <span>room categories</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
@@ -65,15 +65,15 @@ function Sidebar(props) {
                     </div>
                     {!!hallsClicked && (
                         <div>
-                            <NavLink to="/halls/create-hall" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/halls/create-hall" className="p-2 sidebar-button w-100">
                                 <span>create hall</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <NavLink to="/halls/view-halls" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/halls/view-halls" className="p-2 sidebar-button w-100">
                                 <span>view halls</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <NavLink to="/halls/hall-categories" className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/halls/hall-categories" className="p-2 sidebar-button w-100">
                                 <span>hall Categories</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
@@ -117,10 +117,10 @@ function Sidebar(props) {
                                 <span>log out</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </div>
-                            <div className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin" className="p-2 sidebar-button w-100">
                                 <span>go to dashboard</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
-                            </div>
+                            </NavLink>
                             <div className="p-2 sidebar-button w-100">
                                 <span>make admin</span>
                                 <span className="material-icons">keyboard_arrow_right</span>

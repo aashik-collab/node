@@ -8,10 +8,10 @@ import ViewHalls from './Halls/ViewHalls';
 function Halls() {
     return (
         <div>
-            <Route exact path="/halls" component={HallMain} />
-            <Route path="/halls/create-hall" component={CreateHall} />
-            <Route path="/halls/view-halls" component={ViewHalls} />
-            <Route path="/halls/hall-categories" component={HallCategories} />
+            <Route exact path="/admin/halls" component={HallMain} />
+            <Route path="/admin/halls/create-hall" component={CreateHall} />
+            <Route path="/admin/halls/view-halls" component={ViewHalls} />
+            <Route path="/admin/halls/hall-categories" component={HallCategories} />
         </div>
     );
 }

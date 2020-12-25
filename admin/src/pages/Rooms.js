@@ -9,11 +9,11 @@ import ViewRooms from './Rooms/ViewRooms';
 function Rooms() {
     return (
         <div>
-            <Route exact path="/rooms" component={RoomHome} />
-            <Route path="/rooms/create-room" component={CreateRoom} />
-            <Route path="/rooms/room-categories" component={RoomCategories} />
-            <Route path="/rooms/room-types" component={RoomTypes} />
-            <Route path="/rooms/view-rooms" component={ViewRooms} />
+            <Route exact path="/admin/rooms" component={RoomHome} />
+            <Route path="/admin/rooms/create-room" component={CreateRoom} />
+            <Route path="/admin/rooms/room-categories" component={RoomCategories} />
+            <Route path="/admin/rooms/room-types" component={RoomTypes} />
+            <Route path="/admin/rooms/view-rooms" component={ViewRooms} />
         </div>
     );
 }

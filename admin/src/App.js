@@ -33,12 +33,12 @@ function App() {
                     <div className="col-12 col-md-9 col-lg-10 bg-light workspace">
                         <Navbar toggleMobileSidebar={toggleMobileSidebar} />
                         <Switch>
-                            <Route exact path="/" component={Dashboard} />
-                            <Route path="/auth" component={Auth} />
-                            <Route path="/halls" component={Halls} />
-                            <Route path="/rooms" component={Rooms} />
-                            <Route path="/bookings" component={Bookings} />
-                            <Route path="/*" component={NotFoundPage} />
+                            <Route exact path="/admin" component={Dashboard} />
+                            <Route path="/admin/auth" component={Auth} />
+                            <Route path="/admin/halls" component={Halls} />
+                            <Route path="/admin/rooms" component={Rooms} />
+                            <Route path="/admin/bookings" component={Bookings} />
+                            <Route path="/admin/*" component={NotFoundPage} />
                         </Switch>
                     </div>
                 </div>
