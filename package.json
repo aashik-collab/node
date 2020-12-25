@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node server.js",
     "client-install":"cd client && yarn install",
-    "client-build":"cd client && yarn build",
-    "admin-install":"cd admin && yarn install",
+    "client-build":"yarn build --prefix client",
+    "admin-install":"yarn install --prefix admin",
     "admin-build":"cd admin && yarn build",
     "heroku-postbuild":"yarn client-install && yarn client-build && yarn admin-install && yarn admin-build"
   },
