@@ -10,10 +10,10 @@
   },
   "scripts": {
     "start": "node server.js",
-    "client-install":"cd client && yarn install",
+    "client-install":"yarn install --prefix client",
     "client-build":"yarn build --prefix client",
     "admin-install":"yarn install --prefix admin",
-    "admin-build":"cd admin && yarn build",
+    "admin-build":"yarn build --prefix admin",
     "heroku-postbuild":"yarn client-install && yarn client-build && yarn admin-install && yarn admin-build"
   },
   "dependencies": {
