@@ -2,17 +2,18 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import './App.css';
+import Login from './components/Auth/Login';
 import Navbar from './Global/Navbar';
 import Sidebar from './Global/Sidebar';
 import Auth from './pages/Auth';
 import Bookings from './pages/Bookings';
 import Dashboard from './pages/Dashboard';
 import Halls from './pages/Halls';
-import NotFoundPage from './pages/NotFoundPage';
 import Rooms from './pages/Rooms';
 
 function App() {
     const [showMobileViewSidebar, setShowMobileViewSidebar] = React.useState(true);
+
     const toggleMobileSidebar = () => {
         setShowMobileViewSidebar((prev) => !prev);
     };
@@ -20,28 +21,32 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <div className="row m-0">
-                    <div
-                        className={
-                            showMobileViewSidebar
-                                ? 'col-0 col-md-3 col-lg-2 p-3 sidebar mobile-show shadow-lg'
-                                : 'col-0 col-md-3 col-lg-2 p-3 sidebar mobile-hide shadow-lg'
-                        }
-                    >
-                        <Sidebar toggleMobileSidebar={toggleMobileSidebar} />
+                <Switch>
+                    <Route exact path="/admin" component={Login} />
+                </Switch>
+                {
+                    <div className="row m-0">
+                        <div
+                            className={
+                                showMobileViewSidebar
+                                    ? 'col-0 col-md-3 col-lg-2 p-3 sidebar mobile-show shadow-lg'
+                                    : 'col-0 col-md-3 col-lg-2 p-3 sidebar mobile-hide shadow-lg'
+                            }
+                        >
+                            <Sidebar toggleMobileSidebar={toggleMobileSidebar} />
+                        </div>
+                        <div className="col-12 col-md-9 col-lg-10 bg-light workspace">
+                            <Navbar toggleMobileSidebar={toggleMobileSidebar} />
+                            <Switch>
+                                <Route exact path="/admin/dashboard" component={Dashboard} />
+                                <Route path="/admin/auth" component={Auth} />
+                                <Route path="/admin/halls" component={Halls} />
+                                <Route path="/admin/rooms" component={Rooms} />
+                                <Route path="/admin/bookings" component={Bookings} />
+                            </Switch>
+                        </div>
                     </div>
-                    <div className="col-12 col-md-9 col-lg-10 bg-light workspace">
-                        <Navbar toggleMobileSidebar={toggleMobileSidebar} />
-                        <Switch>
-                            <Route exact path="/admin" component={Dashboard} />
-                            <Route path="/admin/auth" component={Auth} />
-                            <Route path="/admin/halls" component={Halls} />
-                            <Route path="/admin/rooms" component={Rooms} />
-                            <Route path="/admin/bookings" component={Bookings} />
-                            <Route path="/admin/*" component={NotFoundPage} />
-                        </Switch>
-                    </div>
-                </div>
+                }
             </div>
         </Router>
     );

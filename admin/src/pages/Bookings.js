@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 function Bookings() {
     return (
@@ -8,4 +9,4 @@ function Bookings() {
     );
 }
 
-export default Bookings;
+export default withRouter(Bookings);

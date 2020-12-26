@@ -3,8 +3,13 @@ import axios from 'axios';
 import Select from 'react-select';
 import TextAreaAutoSize from 'react-textarea-autosize';
 import Switch from 'react-switch';
+import { withRouter } from 'react-router-dom';
 
-function CreateHall() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import getAdminToken from '../../utils/getAdminToken';
+
+function Createhall(props) {
     const [hallCategoriesOptions, setHallCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -18,14 +23,20 @@ function CreateHall() {
     const [discount, setDiscount] = useState(0);
     const [noOfPeople, setNoOfPeople] = useState(0);
 
-    const [errMsg, setErrMsg] = useState(null);
-    const [createSuccess, setCreateSuccess] = useState(null);
     const [createLoader, setCreateLoader] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!hallCategoriesOptions.length) {
-            setErrMsg('please select hall type and category');
+        if (!selectedCategory) {
+            toast.error('category not selected', {
+                autoClose: 3000,
+            });
+            return;
+        }
+        if (!title.length || !description.length || !image.length) {
+            toast.error('all fields are required', {
+                autoClose: 4000,
+            });
             return;
         }
         const formData = new FormData();
@@ -38,63 +49,68 @@ function CreateHall() {
 
         setCreateLoader(true);
         axios
-            .post('/api/halls/create-hall', formData, {
+            .post('/api/halls/create-hall/', formData, {
                 headers: {
-                    Authorization: 'TOKEN',
+                    Authorization: getAdminToken(),
                 },
             })
             .then((res) => {
                 console.log(res);
                 setCreateLoader(null);
                 if (res.data.success) {
-                    setCreateSuccess(true);
-                    setErrMsg(null);
-                    setTimeout(() => {
-                        setCreateSuccess(null);
-                    }, 3000);
+                    toast.success('hall created');
                 }
             })
             .catch((err) => {
                 setCreateLoader(null);
                 console.log(err.response);
                 if (err.response) {
-                    setErrMsg(err.response.data.message);
-                    setTimeout(() => {
-                        setErrMsg(null);
-                    }, 3000);
+                    if (err.response.status === 401) {
+                        props.history.push('/admin');
+                        return;
+                    }
+                    toast.error(err.response.data.message, {
+                        autoClose: 4000,
+                    });
                 }
             });
     };
 
-    // const options = [
-    //     { value: 'chocolate', label: 'Chocolate' },
-    //     { value: 'strawberry', label: 'Strawberry' },
-    //     { value: 'vanilla', label: 'Vanilla' },
-    // ];
-
     useEffect(() => {
-        setCategoryFetched(true);
-
+        setCategoryFetched(null);
         axios
             .get('/api/halls/hall-categories/view-hall-categories')
             .then((res) => {
                 console.log(res);
                 setCategoryFetched(true);
                 if (res.data.success) {
-                    setHallCategories(res.data.hallCategories);
+                    setHallCategories(
+                        res.data.hallCategories.map((category) => {
+                            return {
+                                _id: category._id,
+                                label: category.hall_category,
+                                value: category.hall_category,
+                            };
+                        })
+                    );
                 }
             })
             .catch((err) => {
                 setCategoryFetched(true);
                 console.log(err);
+                if (err.response) {
+                    toast.error(err.response.data.message, {
+                        autoClose: 3000,
+                    });
+                }
             });
         return () => {};
     }, []);
 
     return (
         <div>
-            <h1 className="display-4 m-2 text-center text-muted">Create Hall</h1>
-
+            <ToastContainer />
+            <h1 className="display-4 m-2 text-center text-muted">Create hall</h1>
             <div className="py-2 mt-2 mb-5">
                 <form
                     onSubmit={(e) => {
@@ -102,17 +118,12 @@ function CreateHall() {
                     }}
                     className="form-container border rounded shadow-sm bg-white"
                 >
-                    {categoryFetched && !hallCategoriesOptions.length && (
+                    {!!categoryFetched && !hallCategoriesOptions.length && (
                         <div className="alert alert-warning small text-center">
-                            hall categories are empty, please add them first
+                            hall types or categories are empty, please add them first
                         </div>
                     )}
-                    {!!errMsg && <div className="alert alert-danger small text-center">{errMsg}</div>}
-                    {!!createSuccess && (
-                        <div className="alert alert-danger small text-center">
-                            {'Hall has been created successfully'}
-                        </div>
-                    )}
+
                     <div className="my-2">
                         <label htmlFor="hall-title">Title</label>
                         <input
@@ -123,6 +134,7 @@ function CreateHall() {
                             }}
                             className="form-control bg-light"
                             id="title"
+                            required={true}
                         />
                     </div>
                     <div className="my-2">
@@ -134,6 +146,7 @@ function CreateHall() {
                                 setSelectedCategory(selected);
                             }}
                             options={hallCategoriesOptions}
+                            required
                         />
                     </div>
 
@@ -148,6 +161,7 @@ function CreateHall() {
                             onChange={(e) => {
                                 setDescription(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -161,6 +175,7 @@ function CreateHall() {
                             onChange={(e) => {
                                 setImage(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -173,6 +188,7 @@ function CreateHall() {
                             onChange={(e) => {
                                 setNoOfPeople(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -185,6 +201,7 @@ function CreateHall() {
                             onChange={(e) => {
                                 setPrice(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -197,6 +214,7 @@ function CreateHall() {
                             onChange={(e) => {
                                 setDiscount(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -241,4 +259,4 @@ function CreateHall() {
     );
 }
 
-export default CreateHall;
+export default withRouter(Createhall);

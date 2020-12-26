@@ -3,8 +3,13 @@ import axios from 'axios';
 import Select from 'react-select';
 import TextAreaAutoSize from 'react-textarea-autosize';
 import Switch from 'react-switch';
+import { withRouter } from 'react-router-dom';
 
-function CreateRoom() {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import getAdminToken from '../../utils/getAdminToken';
+
+function CreateRoom(props) {
     const [roomTypesOptions, setRoomTypes] = useState([]);
     const [roomCategoriesOptions, setRoomCategories] = useState([]);
     const [selectedType, setSelectedType] = useState(null);
@@ -20,14 +25,20 @@ function CreateRoom() {
     const [discount, setDiscount] = useState(0);
     const [noOfPeople, setNoOfPeople] = useState(0);
 
-    const [errMsg, setErrMsg] = useState(null);
-    const [createSuccess, setCreateSuccess] = useState(null);
     const [createLoader, setCreateLoader] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!roomTypesOptions.length || !roomCategoriesOptions.length) {
-            setErrMsg('please select room type and category');
+        if (!selectedCategory || !selectedType) {
+            toast.error('category or type not selected', {
+                autoClose: 3000,
+            });
+            return;
+        }
+        if (!title.length || !description.length || !image.length) {
+            toast.error('all fields are required', {
+                autoClose: 4000,
+            });
             return;
         }
         const formData = new FormData();
@@ -43,47 +54,48 @@ function CreateRoom() {
         axios
             .post('/api/rooms/create-room/', formData, {
                 headers: {
-                    Authorization: 'TOKEN',
+                    Authorization: getAdminToken(),
                 },
             })
             .then((res) => {
                 console.log(res);
                 setCreateLoader(null);
                 if (res.data.success) {
-                    setCreateSuccess(true);
-                    setErrMsg(null);
-                    setTimeout(() => {
-                        setCreateSuccess(null);
-                    }, 3000);
+                    toast.success('Room created');
                 }
             })
             .catch((err) => {
                 setCreateLoader(null);
                 console.log(err.response);
                 if (err.response) {
-                    setErrMsg(err.response.data.message);
-                    setTimeout(() => {
-                        setErrMsg(null);
-                    }, 3000);
+                    if (err.response.status === 401) {
+                        props.history.push('/admin');
+                        return;
+                    }
+                    toast.error(err.response.data.message, {
+                        autoClose: 4000,
+                    });
                 }
             });
     };
 
-    // const options = [
-    //     { value: 'chocolate', label: 'Chocolate' },
-    //     { value: 'strawberry', label: 'Strawberry' },
-    //     { value: 'vanilla', label: 'Vanilla' },
-    // ];
-
     useEffect(() => {
-        setTypeCatFetched(true);
+        setTypeCatFetched(null);
         axios
             .get('/api/rooms/room-types/view-room-types')
             .then((res) => {
                 console.log(res);
                 setTypeCatFetched(true);
                 if (res.data.success) {
-                    setRoomTypes(res.data.roomTypes);
+                    setRoomTypes(
+                        res.data.roomTypes.map((type) => {
+                            return {
+                                _id: type._id,
+                                label: type.room_type,
+                                value: type.room_type,
+                            };
+                        })
+                    );
                 }
             })
             .catch((err) => {
@@ -97,20 +109,33 @@ function CreateRoom() {
                 console.log(res);
                 setTypeCatFetched(true);
                 if (res.data.success) {
-                    setRoomCategories(res.data.roomCategories);
+                    setRoomCategories(
+                        res.data.roomCategories.map((category) => {
+                            return {
+                                _id: category._id,
+                                label: category.room_category,
+                                value: category.room_category,
+                            };
+                        })
+                    );
                 }
             })
             .catch((err) => {
                 setTypeCatFetched(true);
                 console.log(err);
+                if (err.response) {
+                    toast.error(err.response.data.message, {
+                        autoClose: 3000,
+                    });
+                }
             });
         return () => {};
     }, []);
 
     return (
         <div>
+            <ToastContainer />
             <h1 className="display-4 m-2 text-center text-muted">Create Room</h1>
-
             <div className="py-2 mt-2 mb-5">
                 <form
                     onSubmit={(e) => {
@@ -118,17 +143,12 @@ function CreateRoom() {
                     }}
                     className="form-container border rounded shadow-sm bg-white"
                 >
-                    {typeCatFetched && (!roomTypesOptions.length || !roomCategoriesOptions.length) && (
+                    {!!typeCatFetched && (!roomTypesOptions.length || !roomCategoriesOptions.length) && (
                         <div className="alert alert-warning small text-center">
                             room types or categories are empty, please add them first
                         </div>
                     )}
-                    {!!errMsg && <div className="alert alert-danger small text-center">{errMsg}</div>}
-                    {!!createSuccess && (
-                        <div className="alert alert-danger small text-center">
-                            {'Room has been created successfully'}
-                        </div>
-                    )}
+
                     <div className="my-2">
                         <label htmlFor="room-title">Title</label>
                         <input
@@ -139,6 +159,7 @@ function CreateRoom() {
                             }}
                             className="form-control bg-light"
                             id="title"
+                            required={true}
                         />
                     </div>
                     <div className="my-2">
@@ -150,6 +171,7 @@ function CreateRoom() {
                                 setSelectedCategory(selected);
                             }}
                             options={roomCategoriesOptions}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -161,6 +183,7 @@ function CreateRoom() {
                                 setSelectedType(selected);
                             }}
                             options={roomTypesOptions}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -174,6 +197,7 @@ function CreateRoom() {
                             onChange={(e) => {
                                 setDescription(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -187,6 +211,7 @@ function CreateRoom() {
                             onChange={(e) => {
                                 setImage(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -199,6 +224,7 @@ function CreateRoom() {
                             onChange={(e) => {
                                 setNoOfPeople(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -211,6 +237,7 @@ function CreateRoom() {
                             onChange={(e) => {
                                 setPrice(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -223,6 +250,7 @@ function CreateRoom() {
                             onChange={(e) => {
                                 setDiscount(e.target.value);
                             }}
+                            required
                         />
                     </div>
                     <div className="my-2">
@@ -267,4 +295,4 @@ function CreateRoom() {
     );
 }
 
-export default CreateRoom;
+export default withRouter(CreateRoom);

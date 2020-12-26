@@ -40,6 +40,7 @@
     background-color: rgb(17, 45, 128);
 }
 .sidebar-buttons-container {
+    padding-bottom: 14px;
 }
 .sidebar-button {
     display: flex;
@@ -68,5 +69,31 @@
 @media only screen and (max-width: 1000px) {
     .form-container {
         width: 90%;
+    }
+}
+
+/*  */
+.login-page {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #4e5b79;
+}
+.login-page form {
+    width: 50%;
+    z-index: 10000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    color: #ddd;
+    border: solid 1px #414e6e;
+    border-radius: 10px;
+    padding: 24px;
+    background-color: #4e5b79;
+}
+@media only screen and (max-width: 768px) {
+    .login-page form {
+        width: 80%;
     }
 }

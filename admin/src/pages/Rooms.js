@@ -1,12 +1,20 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import CreateRoom from './Rooms/CreateRoom';
 import RoomCategories from './Rooms/RoomCategories';
 import RoomTypes from './Rooms/RoomTypes';
 import RoomHome from './Rooms/RoomHome';
 import ViewRooms from './Rooms/ViewRooms';
+import checkAdminAuth from '../utils/checkAdminAuth';
 
-function Rooms() {
+function Rooms(props) {
+    React.useEffect(() => {
+        const authenticated = checkAdminAuth();
+        if (!authenticated) {
+            props.history.push('/admin');
+        }
+        return () => {};
+    }, [props]);
     return (
         <div>
             <Route exact path="/admin/rooms" component={RoomHome} />
@@ -18,4 +26,4 @@ function Rooms() {
     );
 }
 
-export default Rooms;
+export default withRouter(Rooms);

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
+import remoteAdminToken from '../utils/removeAdminToken';
 
 function Sidebar(props) {
     const [roomsClicked, setRoomsClicked] = useState(null);
@@ -9,6 +10,11 @@ function Sidebar(props) {
 
     // methods
     const { toggleMobileSidebar } = props;
+
+    const handleLogout = () => {
+        remoteAdminToken();
+        props.history.push('/admin');
+    };
 
     return (
         <>
@@ -64,7 +70,7 @@ function Sidebar(props) {
                         {!hallsClicked && <span className="material-icons">keyboard_arrow_right</span>}
                     </div>
                     {!!hallsClicked && (
-                        <div>
+                        <div className="sidebar-buttons-container">
                             <NavLink to="/admin/halls/create-hall" className="p-2 sidebar-button w-100">
                                 <span>create hall</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
@@ -92,7 +98,7 @@ function Sidebar(props) {
                         {!bookingsClicked && <span className="material-icons">keyboard_arrow_right</span>}
                     </div>
                     {!!bookingsClicked && (
-                        <div>
+                        <div className="sidebar-buttons-container">
                             <div className="p-2 sidebar-button w-100">
                                 <span>view bookings</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
@@ -112,19 +118,24 @@ function Sidebar(props) {
                         {!settingsClicked && <span className="material-icons">keyboard_arrow_right</span>}
                     </div>
                     {!!settingsClicked && (
-                        <div>
-                            <div className="p-2 sidebar-button w-100">
+                        <div className="sidebar-buttons-container">
+                            <div
+                                className="p-2 sidebar-button w-100"
+                                onClick={() => {
+                                    handleLogout();
+                                }}
+                            >
                                 <span>log out</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </div>
-                            <NavLink exact to="/admin" className="p-2 sidebar-button w-100">
+                            <NavLink exact to="/admin/dashboard" className="p-2 sidebar-button w-100">
                                 <span>go to dashboard</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
                             </NavLink>
-                            <div className="p-2 sidebar-button w-100">
+                            <NavLink to="/admin/auth/make-admin" className="p-2 sidebar-button w-100">
                                 <span>make admin</span>
                                 <span className="material-icons">keyboard_arrow_right</span>
-                            </div>
+                            </NavLink>
                         </div>
                     )}
                 </div>
@@ -133,4 +144,4 @@ function Sidebar(props) {
     );
 }
 
-export default Sidebar;
+export default withRouter(Sidebar);

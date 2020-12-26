@@ -1,11 +1,19 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
+import checkAdminAuth from '../utils/checkAdminAuth';
 import CreateHall from './Halls/CreateHall';
 import HallCategories from './Halls/HallCategories';
 import HallMain from './Halls/HallMain';
 import ViewHalls from './Halls/ViewHalls';
 
-function Halls() {
+function Halls(props) {
+    React.useEffect(() => {
+        const authenticated = checkAdminAuth();
+        if (!authenticated) {
+            props.history.push('/admin');
+        }
+        return () => {};
+    }, [props]);
     return (
         <div>
             <Route exact path="/admin/halls" component={HallMain} />
@@ -16,4 +24,4 @@ function Halls() {
     );
 }
 
-export default Halls;
+export default withRouter(Halls);
