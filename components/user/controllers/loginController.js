@@ -33,7 +33,7 @@ const adminLogin = async (req, res) => {
             return res.status(404).json({ success: false, message: 'user not found' });
         }
         if (user.role !== 'admin') {
-            return res.status(401).json({ success: false, message: 'sorry this email does not belong to ad admin' });
+            return res.status(401).json({ success: false, message: 'sorry this email does not belong to an admin' });
         }
         const passwordMatch = bcrypt.compareSync(password, user.password);
         if (!passwordMatch) {

@@ -39,8 +39,11 @@ const viewHallCategories = async (req, res) => {
     }
 };
 
+const deleteHallCategory = async (req, res) => {};
+
 module.exports = {
     createHallCategory,
     updateHallCategory,
     viewHallCategories,
+    deleteHallCategory,
 };
