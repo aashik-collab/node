@@ -39,8 +39,27 @@ const viewRoomCategories = async (req, res) => {
     }
 };
 
+const deleteRoomCategory = async (req, res) => {
+    try {
+        const { room_category_id } = req.params;
+        if (!room_category_id) {
+            return res.status(400).json({ success: false, message: 'room_category_id not received' });
+        }
+        const roomCategory = await RoomCategory.findById(room_category_id).select('_id');
+        if (!roomCategory) {
+            return res.status(404).json({ success: false, message: 'the room category was not found' });
+        }
+        await RoomCategory.deleteOne({ _id: room_category_id });
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createRoomCategory,
     updateRoomCategory,
     viewRoomCategories,
+    deleteRoomCategory,
 };

@@ -4,7 +4,16 @@ const HallBooks = require('../models/HallBooks');
 
 const createHall = async (req, res) => {
     try {
-        const { hall_category_id, price, discount, availability, title, description, hall_image } = req.body;
+        const {
+            hall_category_id,
+            price,
+            discount,
+            availability,
+            title,
+            description,
+            hall_image,
+            no_of_people,
+        } = req.body;
 
         const hall = new Hall();
         hall.hall_category_id = hall_category_id;
@@ -14,6 +23,7 @@ const createHall = async (req, res) => {
         hall.title = title;
         hall.description = description;
         hall.hall_image = hall_image;
+        hall.no_of_people = no_of_people;
 
         await hall.save();
         return res.status(201).json({ success: true, message: 'hall created' });

@@ -3,7 +3,8 @@ const RoomType = require('../models/RoomTypes');
 const createRoomType = async (req, res) => {
     try {
         const { room_type } = req.body;
-        const roomTypeExists = RoomType.findOne({ room_type });
+        const roomTypeExists = await RoomType.findOne({ room_type });
+        console.log(roomTypeExists);
         if (roomTypeExists) {
             return res.status(400).json({ success: false, message: 'room type already exists' });
         }
@@ -40,8 +41,27 @@ const viewRoomTypes = async (req, res) => {
     }
 };
 
+const deleteRoomType = async (req, res) => {
+    try {
+        const { room_type_id } = req.params;
+        if (!room_type_id) {
+            return res.status(400).json({ success: false, message: 'room_type_id not received' });
+        }
+        const roomType = await RoomType.findById(room_type_id).select('_id');
+        if (!roomType) {
+            return res.status(404).json({ success: false, message: 'the room type was not found' });
+        }
+        await RoomType.deleteOne({ _id: room_type_id });
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, error: true, message: err.message });
+    }
+};
+
 module.exports = {
     createRoomType,
     updateRoomType,
     viewRoomTypes,
+    deleteRoomType,
 };

@@ -26,7 +26,11 @@ Router.delete('/hall-books/delete/:hall_book_id', verifyUserToken, hallBooksCont
 Router.post('/hall-categories/create', hallCategoriesController.createHallCategory);
 Router.put('/hall-categories/update/:hall_category_id', hallCategoriesController.updateHallCategory);
 Router.get('/hall-categories/view-hall-categories', hallCategoriesController.viewHallCategories);
-
+Router.delete(
+    '/hall-categories/delete-hall-category/:hall_category_id',
+    verifyAdminToken,
+    hallCategoriesController.deleteHallCategory
+);
 /*
  *************************** MAKING API PHASE 2 ***************************
  */

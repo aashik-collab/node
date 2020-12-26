@@ -13,6 +13,7 @@ const createRoom = async (req, res) => {
             title,
             description,
             room_image,
+            no_of_people,
         } = req.body;
 
         const room = new Room();
@@ -24,6 +25,7 @@ const createRoom = async (req, res) => {
         room.title = title;
         room.description = description;
         room.room_image = room_image;
+        room.no_of_people = no_of_people;
 
         await room.save();
         return res.status(201).json({ success: true, message: 'room created' });
