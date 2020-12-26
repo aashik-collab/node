@@ -1,4 +1,4 @@
 /node_modules
 /config/.env
-# /client
-# /admin
+/client/build
+/admin/build
