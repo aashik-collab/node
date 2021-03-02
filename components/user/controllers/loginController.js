@@ -26,14 +26,12 @@ const login = async (req, res) => {
 };
 
 const adminLogin = async (req, res) => {
-   console.log('admin login');
    try {
       const { email, password } = req.body;
       console.log(email, password);
       const user = await User.findOne({ email });
       console.log(user);
       if (!user) {
-         console.log('user not found');
          return res.status(404).json({ success: false, message: 'user not found' });
       }
       if (user.role !== 'admin') {
