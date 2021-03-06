@@ -8,6 +8,7 @@ const userRoutes = require('./components/user/userRoutes');
 const roomRoutes = require('./components/room/roomRoutes');
 const hallRoutes = require('./components/hall/hallRoutes');
 const routes = require('./routes');
+const bookingsRoutes = require('./components/bookings/routes');
 
 // cors
 app.use(cors());
@@ -18,5 +19,6 @@ app.use('/api/users', upload.none(), userRoutes);
 app.use('/api/rooms', upload.none(), roomRoutes);
 app.use('/api/halls', upload.none(), hallRoutes);
 app.use('/api', upload.none(), routes);
+app.use('/api', bookingsRoutes);
 
 module.exports = app;
