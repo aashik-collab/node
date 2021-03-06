@@ -5,10 +5,12 @@ const Room = new Schema({
     room_type_id: {
         type: Schema.Types.ObjectId,
         ref: 'roomTypes',
+        required: true,
     },
     room_category_id: {
         type: Schema.Types.ObjectId,
         ref: 'roomCategories',
+        required: true,
     },
     price: {
         type: Number,
@@ -34,6 +36,10 @@ const Room = new Schema({
     room_image: {
         type: String,
         maxlength: [1000, 'room_image can be max 1k chars'],
+    },
+    no_of_people: {
+        type: Number,
+        min: [1, 'min no of people is 1'],
     },
 });
 

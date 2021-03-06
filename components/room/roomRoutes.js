@@ -29,10 +29,22 @@ Router.delete('/room-books/delete/:room_book_id', verifyUserToken, roomBooksCont
 Router.post('/room-categories/create', verifyAdminToken, roomCategoriesController.createRoomCategory);
 Router.put('/room-categories/update/:room_category_id', verifyAdminToken, roomCategoriesController.updateRoomCategory);
 Router.get('/room-categories/view-room-categories', roomCategoriesController.viewRoomCategories);
+Router.delete(
+    '/room-categories/delete-room-category/:room_category_id',
+    verifyAdminToken,
+    roomCategoriesController.deleteRoomCategory
+);
 
 // ROOM TYPES ROUTES
 Router.post('/room-types/create', verifyAdminToken, roomTypesController.createRoomType);
 Router.put('/room-types/update/:room_type_id', verifyAdminToken, roomTypesController.updateRoomType);
 Router.get('/room-types/view-room-types', roomTypesController.viewRoomTypes);
+Router.delete('/room-types/delete-room-type/:room_type_id', verifyAdminToken, roomTypesController.deleteRoomType);
+
+/*
+ *************************** MAKING API PHASE 2 ***************************
+ */
+Router.get('/fetch-some-rooms-for-homepage', roomController.fetchSomeRoomsForHomepage);
+Router.get('/fetch-all-rooms', roomController.fetchAllRooms);
 
 module.exports = Router;

@@ -16,6 +16,7 @@ const createHallReview = async (req, res) => {
         hallReview.rate_value = rate_value;
         hallReview.comment = comment;
         await hallReview.save();
+
         return res.status(201).json({ success: true, message: 'hall review created' });
     } catch (err) {
         console.log(err);
